@@ -1,0 +1,52 @@
+body{
+  font-family:sans-serif;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  padding:15px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  color:white;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  margin:15px 0;
+  animation:fade .5s;
+}
+
+button{
+  background:#0072ff;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+}
+
+.bar{
+  width:100%;
+  background:#ddd;
+  height:15px;
+  border-radius:10px;
+}
+#progress{
+  height:100%;
+  width:0%;
+  background:green;
+  border-radius:10px;
+  transition:.5s;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1}
+}

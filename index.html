@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartKharch</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192x192.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+  <h1 id="title">Smart_Kharch</h1>
+  <button onclick="toggleLanguage()">🌐</button>
+</header>
+
+<section class="card">
+  <h2 data-key="addExpense"></h2>
+  <input type="number" id="amount" placeholder="৳ Amount">
+  <label for="category">Category</label>
+  <select id="category">
+    <option>Food</option>
+    <option>Transport</option>
+    <option>Shopping</option>
+    <option>Bills</option>
+    <option>Other</option>
+  </select>
+  <button onclick="addExpense()">➕</button>
+</section>
+
+<section class="card">
+  <h2 data-key="summary"></h2>
+  <canvas id="chart"></canvas>
+</section>
+
+<section class="card">
+  <h2 data-key="nostreak"></h2>
+  <p id="streak"></p>
+</section>
+
+<section class="card">
+  <h2 data-key="emergency"></h2>
+  <div class="bar">
+    <div id="progress"></div>
+  </div>
+  <p id="emText"></p>
+</section>
+
+<section class="card">
+  <h2 data-key="tips"></h2>
+  <ul id="tips"></ul>
+</section>
+
+<script src="lang.js"></script>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+</body>
+</html>
