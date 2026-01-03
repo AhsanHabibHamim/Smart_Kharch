@@ -3,63 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartKharch</title>
+  <meta name="theme-color" content="#0072ff">
+  <meta name="description" content="Smart expense tracker PWA - Track your daily expenses offline">
+  <title>SmartKharch - Expense Tracker</title>
 
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon-192x192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <div class="container">
+    <!-- Offline Indicator -->
+    <div id="offlineIndicator" class="offline-indicator hidden">
+      <span>📱 You're offline - Data will sync when connection returns</span>
+    </div>
+    <header>
+      <h1 id="title">SmartKharch</h1>
+      <button class="language-btn" onclick="toggleLanguage()">🌐 EN</button>
+    </header>
 
-<header>
-  <h1 id="title">Smart_Kharch</h1>
-  <button onclick="toggleLanguage()">🌐</button>
-</header>
+    <!-- Add Expense Card -->
+    <section class="card">
+      <h2 data-key="addExpense">➕ Add Expense</h2>
+      <div class="form-group">
+        <label for="amount">Amount (৳)</label>
+        <input type="number" id="amount" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="Food">🍕 Food</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Shopping">🛍️ Shopping</option>
+          <option value="Bills">💡 Bills</option>
+          <option value="Entertainment">🎬 Entertainment</option>
+          <option value="Health">🏥 Health</option>
+          <option value="Education">📚 Education</option>
+          <option value="Other">📦 Other</option>
+        </select>
+      </div>
+      <button class="btn btn-success" onclick="addExpense()">
+        <span id="addBtnText">Add Expense</span>
+        <span id="addBtnSpinner" class="spinner"></span>
+      </button>
+    </section>
 
-<section class="card">
-  <h2 data-key="addExpense"></h2>
-  <input type="number" id="amount" placeholder="৳ Amount">
-  <label for="category">Category</label>
-  <select id="category">
-    <option>Food</option>
-    <option>Transport</option>
-    <option>Shopping</option>
-    <option>Bills</option>
-    <option>Other</option>
-  </select>
-  <button onclick="addExpense()">➕</button>
-</section>
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat">
+        <div>
+          <div class="stat-value" id="totalExpenses">৳0</div>
+          <div class="stat-label" data-key="monthlyExpenses">Total Expenses</div>
+        </div>
+        <div>📊</div>
+      </div>
+      <div class="stat">
+        <div>
+          <div class="stat-value" id="streak">0</div>
+          <div class="stat-label">No-Spend Days</div>
+        </div>
+        <div>🔥</div>
+      </div>
+    </div>
 
-<section class="card">
-  <h2 data-key="summary"></h2>
-  <canvas id="chart"></canvas>
-</section>
+    <!-- Summary Chart -->
+    <section class="card">
+      <h2 data-key="summary">📊 Expense Summary</h2>
+      <div class="chart-container">
+        <canvas id="chart"></canvas>
+      </div>
+    </section>
+
+    <!-- Recent Expenses -->
+    <section class="card">
+      <h2 data-key="recent">📝 Recent Expenses</h2>
+      <ul id="expenseList">
+        <li>No expenses yet. Add your first expense above!</li>
+      </ul>
+    </section>
 
 <section class="card">
   <h2 data-key="nostreak"></h2>
   <p id="streak"></p>
 </section>
 
-<section class="card">
-  <h2 data-key="emergency"></h2>
-  <div class="bar">
-    <div id="progress"></div>
+    <!-- Emergency Fund -->
+    <section class="card">
+      <h2 data-key="emergency">🛡️ Emergency Fund</h2>
+      <div class="progress-container">
+        <div class="bar">
+          <div id="progress"></div>
+        </div>
+        <p id="emText">Build Emergency Fund</p>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="card">
+      <h2 data-key="tips">💡 Smart Tips</h2>
+      <ul id="tips">
+        <li>Welcome to SmartKharch! Start tracking your expenses to get personalized tips.</li>
+      </ul>
+      <div class="data-buttons">
+        <button class="btn data-btn" onclick="exportData()">📤 Export Data</button>
+        <button class="btn data-btn" onclick="importData()">📥 Import Data</button>
+        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
+      </div>
+    </section>
   </div>
-  <p id="emText"></p>
-</section>
 
-<section class="card">
-  <h2 data-key="tips"></h2>
-  <ul id="tips"></ul>
-</section>
+  <!-- PWA Install Prompt -->
+  <div id="installPrompt" class="install-prompt hidden">
+    <p>📱 Install SmartKharch for the best experience!</p>
+    <button id="installBtn" class="btn install-btn">Install App</button>
+    <button id="dismissBtn" class="btn dismiss-btn">Maybe Later</button>
+  </div>
 
-<script src="lang.js"></script>
-<script src="app.js"></script>
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
+  <script src="lang.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
