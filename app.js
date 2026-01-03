@@ -415,6 +415,11 @@ function init() {
 
     updateUI();
 
+    // Enable form elements
+    amountInput.disabled = false;
+    categorySelect.disabled = false;
+    document.querySelector('button[onclick="addExpense()"]').disabled = false;
+
     // Request notification permission for PWA
     if ('Notification' in window && Notification.permission === 'default') {
         Notification.requestPermission();

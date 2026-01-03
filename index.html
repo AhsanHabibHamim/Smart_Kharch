@@ -30,11 +30,11 @@
       <h2 data-key="addExpense">➕ Add Expense</h2>
       <div class="form-group">
         <label for="amount">Amount (৳)</label>
-        <input type="number" id="amount" placeholder="0.00" min="0" step="0.01">
+        <input type="number" id="amount" placeholder="0.00" min="0" step="0.01" disabled>
       </div>
       <div class="form-group">
         <label for="category">Category</label>
-        <select id="category">
+        <select id="category" disabled>
           <option value="Food">🍕 Food</option>
           <option value="Transport">🚗 Transport</option>
           <option value="Shopping">🛍️ Shopping</option>
@@ -45,7 +45,7 @@
           <option value="Other">📦 Other</option>
         </select>
       </div>
-      <button class="btn btn-success" onclick="addExpense()">
+      <button class="btn btn-success" onclick="addExpense()" disabled>
         <span id="addBtnText">Add Expense</span>
         <span id="addBtnSpinner" class="spinner"></span>
       </button>
