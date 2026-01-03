@@ -413,12 +413,18 @@ function init() {
     dismissBtn = document.getElementById('dismissBtn');
     offlineIndicator = document.getElementById('offlineIndicator');
 
-    updateUI();
+    // Enable form elements first
+    if (amountInput) amountInput.disabled = false;
+    if (categorySelect) categorySelect.disabled = false;
+    if (document.querySelector('button[onclick="addExpense()"]')) {
+        document.querySelector('button[onclick="addExpense()"]').disabled = false;
+    }
 
-    // Enable form elements
-    amountInput.disabled = false;
-    categorySelect.disabled = false;
-    document.querySelector('button[onclick="addExpense()"]').disabled = false;
+    try {
+        updateUI();
+    } catch (error) {
+        console.error('Error updating UI:', error);
+    }
 
     // Request notification permission for PWA
     if ('Notification' in window && Notification.permission === 'default') {
