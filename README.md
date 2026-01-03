@@ -84,5 +84,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Made with ❤️ for better expense tracking**</content>
-<parameter name="filePath">c:\Users\Wave Computer's\OneDrive\Desktop\smartkharch\README.md
+**Made with ❤️ for better expense tracking** ***AhsanHabibHamim***
